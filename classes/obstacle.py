@@ -1,4 +1,3 @@
-from .Player import Player
 import random
 
 class Obstacle:
@@ -20,11 +19,4 @@ class Obstacle:
         if difficulty == "hard":
             self.difficulty = "hard"
             self.size = random.randint(1.1, 1.5)
-        
-    def setPosition(self, player1: Player, player2: Player):
-        if player1.position > player2.position:
-            self.position = (player1.position - player2.position)/2
-        if player2.position > player1.position:
-            self.position = (player2.position - player1.position)/2
-
     
