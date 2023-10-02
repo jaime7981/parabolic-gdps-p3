@@ -3,7 +3,6 @@ from classes.enums import Difficulty
 
 from random import randint
 
-GRAVITY = 9.8
 PLAYER_HEIGHT = 10 ## in pixels
 PLAYER_WIDTH = 5 ## in pixels
 
@@ -87,10 +86,9 @@ class Game():
         print('Players: ', self.players)
         print('Obstacle: ', self.obstacle)
         print('Wind: ', self.wind_diff)
-        print('Gravity: ', GRAVITY)
         print('Width limits: ', self.width_limits)
         print('Height limits: ', self.height_limits)
 
 
     def __str__(self) -> str:
-        return f'Game: {self.players}, {self.obstacle}, {self.wind_diff}, {GRAVITY}, {self.width_limits}, {self.height_limits}'
+        return f'Game: {self.players}, {self.obstacle}, {self.wind_diff}, {self.width_limits}, {self.height_limits}'
