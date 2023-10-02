@@ -13,13 +13,13 @@ class Physics():
             self.magnitud = 0
 
         if difficulty == Difficulty.easy:
-            self.magnitud = randint(0.1, 0.5)
+            self.magnitud = randint(1, 5)
 
         if difficulty == Difficulty.medium:
-            self.magnitud = randint(0.51, 1)
+            self.magnitud = randint(5, 10)
 
         if difficulty == Difficulty.hard:
-            self.magnitud == randint(1, 2)
+            self.magnitud == randint(10, 20)
 
 
     def setAngle(self, angle: int):
