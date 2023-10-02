@@ -1,4 +1,6 @@
 from classes.Obstacle import Obstacle
+from classes.Proyectil import Proyectil
+from classes.Physics import Physics
 from classes.enums import Difficulty
 
 from random import randint
@@ -6,7 +8,7 @@ from random import randint
 PLAYER_HEIGHT = 10 ## in pixels
 PLAYER_WIDTH = 5 ## in pixels
 
-class Game():
+class Enviroment():
     def __init__(self, width_limits = (0,500), height_limits = (0, 500), obstacle_diff = Difficulty.easy, wind_diff = Difficulty.easy) -> None:
         self.players = []
 
@@ -15,6 +17,10 @@ class Game():
 
         self.obstacle_diff = obstacle_diff
         self.wind_diff = wind_diff
+
+        self.physics = Physics(self.wind_diff)
+
+        self.proyectile = Proyectil(self.physics)
 
         self.obstacle = self.create_obstacle()
 

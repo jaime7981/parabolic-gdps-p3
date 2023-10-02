@@ -1,11 +1,11 @@
-from classes.Enviroment import Game
+from classes.Enviroment import Enviroment
 from classes.Player import Player
 
 def main():
     player_1 = Player(player_name = 'player_1')
     player_2 = Player(player_name = 'player_2')
 
-    game = Game()
+    game = Enviroment()
 
     game.add_player(player_1)
     game.add_player(player_2)
