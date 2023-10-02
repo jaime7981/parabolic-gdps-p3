@@ -4,6 +4,10 @@ class Player():
         self.player_name = player_name
         self.player_position = position
 
+    
+    def set_position(self, position) -> None:
+        self.player_position = position
+
 
     def __str__(self) -> str:
         return self.player_name
