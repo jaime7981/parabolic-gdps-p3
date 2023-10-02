@@ -9,3 +9,7 @@ class Obstacle():
 
     def set_position(self, position) -> None:
         self.position = position
+
+
+    def __str__(self) -> str:
+        return f'position: {self.position}, width: {self.width}, height: {self.height}'

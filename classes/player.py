@@ -14,4 +14,4 @@ class Player():
     
 
     def __repr__(self) -> str:
-        return self.player_name
+        return f'name: {self.player_name}, position: {self.player_position}'

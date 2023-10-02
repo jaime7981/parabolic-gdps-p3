@@ -1,5 +1,6 @@
-from obstacle import Obstacle
-from enums import Difficulty
+from classes.obstacle import Obstacle
+from classes.enums import Difficulty
+
 from random import randint
 
 GRAVITY = 9.8
@@ -81,7 +82,7 @@ class Game():
 
     def start_game(self) -> None:
         self.setup_positions()
-        
+
         print('Game started!')
         print('Players: ', self.players)
         print('Obstacle: ', self.obstacle)
@@ -89,3 +90,7 @@ class Game():
         print('Gravity: ', GRAVITY)
         print('Width limits: ', self.width_limits)
         print('Height limits: ', self.height_limits)
+
+
+    def __str__(self) -> str:
+        return f'Game: {self.players}, {self.obstacle}, {self.wind_diff}, {GRAVITY}, {self.width_limits}, {self.height_limits}'
