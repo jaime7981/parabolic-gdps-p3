@@ -1,5 +1,5 @@
 from classes.Enviroment import Game
-from classes.player import Player
+from classes.Player import Player
 
 def main():
     player_1 = Player(player_name = 'player_1')
