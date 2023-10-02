@@ -1,4 +1,4 @@
-from .Wind import Wind
+from classes.Wind import Wind
 
 class Proyectil:
     def __init__(self):

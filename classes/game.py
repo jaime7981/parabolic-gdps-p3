@@ -1,4 +1,4 @@
-from classes.obstacle import Obstacle
+from classes.Obstacle import Obstacle
 from classes.enums import Difficulty
 
 from random import randint
