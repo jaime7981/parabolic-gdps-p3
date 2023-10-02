@@ -1,5 +1,6 @@
+import random
 
-class Player():
+class Player:
     def __init__(self, position = (0, 0), player_name = 'default_player') -> None:
         self.player_name = player_name
         self.player_position = position
