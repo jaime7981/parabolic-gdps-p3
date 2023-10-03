@@ -206,11 +206,9 @@ class GUI():
                 self.running = False
             
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Left mouse button
-                    x, y = pygame.mouse.get_pos()
-                    print(f"Left click at position: ({x}, {y})")
-                    self.enviroment.change_turn()
+                if event.button == 1:
                     self.shoot_projectile()
+                    self.enviroment.change_turn()
 
 
     def run_game(self) -> None:

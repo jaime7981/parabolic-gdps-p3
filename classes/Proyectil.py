@@ -25,7 +25,7 @@ class Proyectil:
 
 
     def add_time(self):
-        self.time += 0.01
+        self.time += 0.1
 
 
     def calculate_position_on_proyectile_time(self):
