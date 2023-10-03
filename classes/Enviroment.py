@@ -116,5 +116,25 @@ class Enviroment():
         print('Height limits: ', self.height_limits)
 
 
+    def check_game_end(self) -> bool:
+        for player in self.players:
+            if player.health <= 0:
+                return (
+                    True, 
+                    {
+                        'looser' : player,
+                        'winner' : self.get_winner()
+                    }
+                )
+        
+        return (False, None)
+    
+
+    def get_winner(self) -> None:
+        for player in self.players:
+            if player.health > 0:
+                return player
+
+
     def __str__(self) -> str:
         return f'Game: {self.players}, {self.obstacle}, {self.wind_diff}, {self.width_limits}, {self.height_limits}'

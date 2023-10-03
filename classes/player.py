@@ -10,6 +10,8 @@ class Player:
 
         self.color = player_color
 
+        self.health = 100
+
     
     def set_position(self, position) -> None:
         self.player_position = position
@@ -26,6 +28,14 @@ class Player:
     def set_dimensions(self, width, height) -> None:
         self.set_width(width)
         self.set_height(height)
+
+
+    def set_health(self, health) -> None:
+        self.health = health
+
+
+    def substrac_health(self, damage) -> None:
+        self.health -= damage
 
 
     def player_center(self) -> tuple:
