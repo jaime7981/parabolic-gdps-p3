@@ -18,7 +18,7 @@ class GUI():
         self.background_floor = background_floor
 
         pygame.font.init()
-        self.font = pygame.font.SysFont('Arial', 72)
+        self.font = pygame.font.SysFont('Arial', 10)
 
         self.enviroment = enviroment
 
@@ -69,10 +69,47 @@ class GUI():
             self.draw_player(player)
 
 
+    def draw_mouse_position(self) -> None:
+        x, y = pygame.mouse.get_pos()
+        pygame.draw.circle(self.screen, (0, 10, 155), (x, y), 5)
+
+
+    def draw_moise_line_from_player(self) -> None:
+        actual_player = self.enviroment.actual_payer
+        player_center = actual_player.player_center()
+
+        x, y = pygame.mouse.get_pos()
+
+        pygame.draw.line(
+            self.screen, 
+            (0, 0, 0), 
+            (
+                player_center[0],
+                self.normalize_y_position_to_floor(player_center[1])
+            ), 
+            (x, y)
+        )
+
+        self.draw_magnitude_labels(x, y)
+
+
+    def draw_magnitude_labels(self, x, y) -> None:
+        label_1_surface = self.font.render(f'velocity: int', True, 'black')
+        label_2_surface = self.font.render(f'angle: int', True, 'black')
+        self.screen.blit(label_1_surface, (x + 15, y + 15))
+        self.screen.blit(label_2_surface, (x + 15, y + 25))
+
+
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left mouse button
+                    x, y = pygame.mouse.get_pos()
+                    print(f"Left click at position: ({x}, {y})")
+                    self.enviroment.change_turn()
 
 
     def run_game(self) -> None:
@@ -83,6 +120,8 @@ class GUI():
             self.draw_background()
             self.draw_players()
             self.draw_obstacle(self.enviroment.obstacle)
+            self.draw_moise_line_from_player()
+            self.draw_mouse_position()
 
             pygame.display.update()
 

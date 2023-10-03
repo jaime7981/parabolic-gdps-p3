@@ -11,6 +11,8 @@ PLAYER_WIDTH = 20 ## in pixels
 class Enviroment():
     def __init__(self, width_limits = (0,500), height_limits = (0, 500), obstacle_diff = Difficulty.easy, wind_diff = Difficulty.easy) -> None:
         self.players = []
+        self.actual_payer = None
+        self.turns = 0
 
         self.width_limits = width_limits
         self.height_limits = height_limits
@@ -33,6 +35,13 @@ class Enviroment():
         else:
             print('Max players reached!')
             return False
+        
+
+    def change_turn(self) -> None:
+        self.turns += 1
+        self.actual_payer = self.players[self.turns % len(self.players)]
+        
+        return self.actual_payer
         
 
     def create_obstacle(self) -> None:
@@ -88,6 +97,7 @@ class Enviroment():
 
     def start_game(self) -> None:
         self.setup_positions()
+        self.actual_payer = self.players[0]
 
         print('Game started!')
         print('Players: ', self.players)

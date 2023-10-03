@@ -28,6 +28,10 @@ class Player:
         self.set_height(height)
 
 
+    def player_center(self) -> tuple:
+        return (self.player_position[0] + self.width // 2, self.player_position[1] + self.height // 2)
+
+
     def __str__(self) -> str:
         return self.player_name
     
