@@ -1,6 +1,6 @@
 from classes.enums import Difficulty
 from random import randint
-
+import math
 
 class Physics():
     def __init__(self, difficulty: Difficulty = Difficulty.easy) -> None:
@@ -20,6 +20,20 @@ class Physics():
 
         if difficulty == Difficulty.hard:
             self.magnitud = randint(10, 20)
+
+
+    def get_angle_from_two_points(self, point_a: tuple, point_b: tuple) -> int:
+        x1, y1 = point_a
+        x2, y2 = point_b
+
+        return int(math.degrees(math.atan2(y2 - y1, x2 - x1)))
+
+
+    def get_distance_from_two_points(self, point_a: tuple, point_b: tuple) -> int:
+        x1, y1 = point_a
+        x2, y2 = point_b
+
+        return int(math.sqrt((x2 - x1)**2 + (y2 - y1)**2))
 
 
     def setAngle(self, angle: int):

@@ -74,30 +74,51 @@ class GUI():
         pygame.draw.circle(self.screen, (0, 10, 155), (x, y), 5)
 
 
-    def draw_moise_line_from_player(self) -> None:
+    def get_player_and_mouse_positions(self) -> tuple:
         actual_player = self.enviroment.actual_payer
         player_center = actual_player.player_center()
+        player_center = (
+            player_center[0], 
+            self.normalize_y_position_to_floor(player_center[1])
+        )
 
         x, y = pygame.mouse.get_pos()
+
+        return [player_center, (x, y)]
+
+
+    def draw_mouse_line_from_player(self) -> None:
+        player_center, mouse_position = self.get_player_and_mouse_positions()
 
         pygame.draw.line(
             self.screen, 
             (0, 0, 0), 
-            (
-                player_center[0],
-                self.normalize_y_position_to_floor(player_center[1])
-            ), 
-            (x, y)
+            player_center, 
+            mouse_position
         )
 
-        self.draw_magnitude_labels(x, y)
+
+    def normalize_angle_label_value(self, angle: int) -> int:
+        # make angle always positive
+        angle = abs(angle)
+
+        if angle > 90:
+            angle = 180 - angle
+
+        return angle 
 
 
-    def draw_magnitude_labels(self, x, y) -> None:
-        label_1_surface = self.font.render(f'velocity: int', True, 'black')
-        label_2_surface = self.font.render(f'angle: int', True, 'black')
-        self.screen.blit(label_1_surface, (x + 15, y + 15))
-        self.screen.blit(label_2_surface, (x + 15, y + 25))
+    def draw_shooting_labels(self) -> None:
+        player_center, mouse_position = self.get_player_and_mouse_positions()
+
+        velocity = self.enviroment.physics.get_distance_from_two_points(player_center, mouse_position)
+        angle = self.enviroment.physics.get_angle_from_two_points(player_center, mouse_position)
+        angle = self.normalize_angle_label_value(angle)
+
+        label_1_surface = self.font.render(f'velocity: {velocity}', True, 'black')
+        label_2_surface = self.font.render(f'angle: {angle}', True, 'black')
+        self.screen.blit(label_1_surface, (mouse_position[0] + 15, mouse_position[1] + 15))
+        self.screen.blit(label_2_surface, (mouse_position[0] + 15, mouse_position[1] + 25))
 
 
     def check_events(self):
@@ -120,8 +141,9 @@ class GUI():
             self.draw_background()
             self.draw_players()
             self.draw_obstacle(self.enviroment.obstacle)
-            self.draw_moise_line_from_player()
+            self.draw_mouse_line_from_player()
             self.draw_mouse_position()
+            self.draw_shooting_labels()
 
             pygame.display.update()
 
