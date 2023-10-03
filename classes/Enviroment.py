@@ -14,6 +14,8 @@ class Enviroment():
         self.actual_payer = None
         self.turns = 0
 
+        self.proyectiles = []
+
         self.width_limits = width_limits
         self.height_limits = height_limits
 
@@ -102,6 +104,22 @@ class Enviroment():
         )
 
         return proyectile
+    
+
+    def shoot(self, angle, velocity, player_center) -> None:
+        proyectile = self.create_proyecile(angle, velocity, player_center)
+
+        self.proyectiles.append(proyectile)
+
+        return proyectile
+
+    def move_proyectiles(self) -> None:
+        for proyectile in self.proyectiles:
+            proyectile.add_time()
+            proyectile.position = proyectile.calculate_position(proyectile.time)
+
+            if proyectile.time > 100:
+                self.proyectiles.remove(proyectile)
         
 
     def start_game(self) -> None:

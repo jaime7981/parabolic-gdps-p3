@@ -8,12 +8,28 @@ class Proyectil:
         self.velocity = velocity
         self.initial_position = start_position
         self.position = start_position
+
+        self.time = 0
+
     
     def set_angle(self, angle: int):
         self.angle = angle
+
     
     def set_velocity(self, velocity: int):
         self.velocity = velocity
+
+
+    def reset_time(self):
+        self.time = 0
+
+
+    def add_time(self):
+        self.time += 0.01
+
+
+    def calculate_position_on_proyectile_time(self):
+        return self.calculate_position(self.time)
 
 
     def calculate_position(self, time: int):

@@ -146,7 +146,7 @@ class GUI():
         return angle 
 
 
-    def draw_shooting_labels(self) -> None:
+    def draw_mouse_shooting_labels(self) -> None:
         player_center, mouse_position = self.get_player_and_mouse_positions()
 
         velocity = self.enviroment.physics.get_distance_from_two_points(player_center, mouse_position)
@@ -177,6 +177,29 @@ class GUI():
             pygame.draw.circle(self.screen, 'red', position, 1)
 
 
+    def draw_proyectiles(self) -> None:
+        for proyectile in self.enviroment.proyectiles:
+            proyectile_position = proyectile.calculate_position_on_proyectile_time()
+            proyectile.add_time()
+
+            pygame.draw.circle(self.screen, (10, 200, 100), proyectile_position, 5)
+
+
+    def shoot_projectile(self):
+        player_center, mouse_position = self.get_player_and_mouse_positions()
+
+        velocity = self.enviroment.physics.get_distance_from_two_points(player_center, mouse_position)
+        angle = self.enviroment.physics.get_angle_from_two_points(player_center, mouse_position)
+
+        self.enviroment.shoot(angle, velocity, player_center)
+    
+
+    def draw_mouse(self):
+        self.draw_mouse_line_from_player()
+        self.draw_mouse_position()
+        self.draw_mouse_shooting_labels()
+
+
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -187,6 +210,7 @@ class GUI():
                     x, y = pygame.mouse.get_pos()
                     print(f"Left click at position: ({x}, {y})")
                     self.enviroment.change_turn()
+                    self.shoot_projectile()
 
 
     def run_game(self) -> None:
@@ -197,10 +221,9 @@ class GUI():
             self.draw_background()
             self.draw_players()
             self.draw_obstacle(self.enviroment.obstacle)
-            self.draw_mouse_line_from_player()
-            self.draw_mouse_position()
-            self.draw_shooting_labels()
+            self.draw_mouse()
             self.draw_proyectile_trajectory()
+            self.draw_proyectiles()
 
             pygame.display.update()
 
