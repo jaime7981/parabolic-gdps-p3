@@ -133,7 +133,7 @@ class GUI():
             player_center
         )
 
-        for time in range(-50, 50):
+        for time in range(-10, 50):
             position = proyectile.calculate_position(time / 3)
 
             pygame.draw.circle(self.screen, 'red', position, 1)

@@ -17,7 +17,7 @@ class Proyectil:
 
 
     def calculate_position(self, time: int):
-        x = self.physics.calculate_position_x(time, self.velocity, self.initial_position[0])
-        y = self.physics.calculate_position_y(time, self.velocity, self.initial_position[1])
+        x = self.physics.calculate_position_x(time, self.velocity, self.angle, self.initial_position[0])
+        y = self.physics.calculate_position_y(time, self.velocity, self.angle, self.initial_position[1])
 
         return (x, y)
