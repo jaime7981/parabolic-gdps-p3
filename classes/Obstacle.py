@@ -1,10 +1,12 @@
 
 class Obstacle():
-    def __init__(self, width, height, position  = (0, 0)) -> None:
+    def __init__(self, width, height, position  = [0, 0], obstacle_color = 'black') -> None:
         self.width = width
         self.height = height
 
         self.position = position
+
+        self.color = obstacle_color
 
 
     def set_position(self, position) -> None:

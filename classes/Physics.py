@@ -19,7 +19,7 @@ class Physics():
             self.magnitud = randint(5, 10)
 
         if difficulty == Difficulty.hard:
-            self.magnitud == randint(10, 20)
+            self.magnitud = randint(10, 20)
 
 
     def setAngle(self, angle: int):

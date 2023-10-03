@@ -5,8 +5,8 @@ from classes.enums import Difficulty
 
 from random import randint
 
-PLAYER_HEIGHT = 10 ## in pixels
-PLAYER_WIDTH = 5 ## in pixels
+PLAYER_HEIGHT = 40 ## in pixels
+PLAYER_WIDTH = 20 ## in pixels
 
 class Enviroment():
     def __init__(self, width_limits = (0,500), height_limits = (0, 500), obstacle_diff = Difficulty.easy, wind_diff = Difficulty.easy) -> None:
@@ -27,6 +27,7 @@ class Enviroment():
 
     def add_player(self, player) -> bool:
         if len(self.players) <= 2:
+            player.set_dimensions(PLAYER_WIDTH, PLAYER_HEIGHT)
             self.players.append(player)
             return True
         else:
