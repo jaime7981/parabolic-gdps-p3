@@ -13,11 +13,11 @@ def initial_setup() -> (Difficulty, Difficulty):
     
     while True:
         print("\nNone -> 0\nEasy -> 1\nMedium -> 2\nHard -> 3\n")
-        # obstacle_diff = input('Enter obstacle difficulty [0-3]: ')
-        # wind_diff = input('Enter wind difficulty [0-3]: ')
+        obstacle_diff = input('Enter obstacle difficulty [0-3]: ')
+        wind_diff = input('Enter wind difficulty [0-3]: ')
         
-        obstacle_diff = '1'
-        wind_diff = '1'
+        # obstacle_diff = '1'
+        # wind_diff = '1'
 
         if validate_input(obstacle_diff) and validate_input(wind_diff):
             obstacle_diff = int(obstacle_diff)

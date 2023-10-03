@@ -35,6 +35,9 @@ class GUI():
 
 
     def draw_obstacle(self, obstacle: Obstacle) -> None:
+        if obstacle is None:
+            return
+        
         rect = pygame.Rect(
             obstacle.position[0], 
             self.normalize_y_position_to_floor(obstacle.position[1]) - obstacle.height, 
