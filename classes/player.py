@@ -1,6 +1,6 @@
 
 class Player:
-    def __init__(self, width = 20, height = 40, position = (0, 0), player_color = 'blue', player_name = 'default_player') -> None:
+    def __init__(self, width = 20, height = 40, position = (0, 0), player_color = 'blue', health = 100, player_name = 'default_player') -> None:
         self.player_name = player_name
 
         self.width = width
@@ -10,7 +10,7 @@ class Player:
 
         self.color = player_color
 
-        self.health = 100
+        self.health = health
 
     
     def set_position(self, position) -> None:

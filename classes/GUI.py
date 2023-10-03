@@ -70,6 +70,42 @@ class GUI():
     def draw_players(self) -> None:
         for player in self.enviroment.players:
             self.draw_player(player)
+            self.draw_player_health(player)
+
+
+    def draw_player_health(self, player: Player) -> None:
+        player_center = player.player_center()
+        player_center = (
+            player_center[0], 
+            self.normalize_y_position_to_floor(player_center[1])
+        )
+
+        player_center = (
+            player_center[0] - player.width * 5 // 2, 
+            player_center[1] - player.height
+        )
+
+        pygame.draw.rect(
+            self.screen, 
+            'black', 
+            pygame.Rect(
+                player_center[0], 
+                player_center[1], 
+                100, 
+                5
+            )
+        )
+
+        pygame.draw.rect(
+            self.screen,
+            'red',
+            pygame.Rect(
+                player_center[0], 
+                player_center[1], 
+                player.health, 
+                3
+            )
+        )
 
 
     def draw_mouse_position(self) -> None:
@@ -102,7 +138,6 @@ class GUI():
 
 
     def normalize_angle_label_value(self, angle: int) -> int:
-        # make angle always positive
         angle = abs(angle)
 
         if angle > 90:
