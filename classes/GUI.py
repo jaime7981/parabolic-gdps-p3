@@ -121,6 +121,24 @@ class GUI():
         self.screen.blit(label_2_surface, (mouse_position[0] + 15, mouse_position[1] + 25))
 
 
+    def draw_proyectile_trajectory(self) -> None:
+        player_center, mouse_position = self.get_player_and_mouse_positions()
+
+        velocity = self.enviroment.physics.get_distance_from_two_points(player_center, mouse_position)
+        angle = self.enviroment.physics.get_angle_from_two_points(player_center, mouse_position)
+
+        proyectile = self.enviroment.create_proyecile(
+            angle, 
+            velocity,
+            player_center
+        )
+
+        for time in range(-50, 50):
+            position = proyectile.calculate_position(time / 3)
+
+            pygame.draw.circle(self.screen, 'red', position, 1)
+
+
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -144,6 +162,7 @@ class GUI():
             self.draw_mouse_line_from_player()
             self.draw_mouse_position()
             self.draw_shooting_labels()
+            self.draw_proyectile_trajectory()
 
             pygame.display.update()
 

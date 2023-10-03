@@ -22,8 +22,6 @@ class Enviroment():
 
         self.physics = Physics(self.wind_diff)
 
-        self.proyectile = Proyectil(self.physics)
-
         self.obstacle = self.create_obstacle()
 
 
@@ -93,6 +91,17 @@ class Enviroment():
             )
 
         return True
+    
+
+    def create_proyecile(self, angle, velocity, player_center) -> None:
+        proyectile = Proyectil(
+            angle, 
+            velocity, 
+            self.physics, 
+            player_center
+        )
+
+        return proyectile
         
 
     def start_game(self) -> None:

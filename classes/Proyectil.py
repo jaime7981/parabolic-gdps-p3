@@ -1,28 +1,23 @@
 from classes.Physics import Physics
 
 class Proyectil:
-    def __init__(self, physics: Physics = Physics()):
+    def __init__(self, angle, velocity, physics: Physics = Physics(), start_position: tuple = (0, 0)) -> None:
         self.physics = physics
 
-        self.angle = 0
-        self.velocityX = 0
-        self.velocityY = 0
-        self.initialPosX = 0
-        self.initialPosY = 0
-        self.positionX = 0
-        self.positionY = 0
+        self.angle = angle
+        self.velocity = velocity
+        self.initial_position = start_position
+        self.position = start_position
     
-    def setAngle(self, angle: int):
+    def set_angle(self, angle: int):
         self.angle = angle
     
-    def setVelocityX(self, velocity: int):
-        self.velocityX = velocity
-    
-    def setVelocityY(self, velocity: int):
-        self.velocityY = velocity
+    def set_velocity(self, velocity: int):
+        self.velocity = velocity
 
-    def calculatePositionX(self, time: int): 
-        return self.physics.calculatePositionX(self, time, self.initialPosX)
-    
-    def calculatePositionY(self, time: int):
-        return self.physics.calculatePositionY(self, time, self.initialPosY)
+
+    def calculate_position(self, time: int):
+        x = self.physics.calculate_position_x(time, self.velocity, self.initial_position[0])
+        y = self.physics.calculate_position_y(time, self.velocity, self.initial_position[1])
+
+        return (x, y)
