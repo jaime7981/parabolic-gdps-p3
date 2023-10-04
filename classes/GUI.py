@@ -67,10 +67,27 @@ class GUI():
         )
 
 
+    def draw_player_name(self, player: Player) -> None:
+        player_center = player.player_center()
+        player_center = (
+            player_center[0], 
+            self.normalize_y_position_to_floor(player_center[1])
+        )
+
+        player_center = (
+            player_center[0] - player.width * 5 // 2, 
+            player_center[1] - player.height + 5
+        )
+
+        label_surface = self.font.render(player.player_name, True, 'black')
+        self.screen.blit(label_surface, player_center)
+
+
     def draw_players(self) -> None:
         for player in self.enviroment.players:
             self.draw_player(player)
             self.draw_player_health(player)
+            self.draw_player_name(player)
 
 
     def draw_player_health(self, player: Player) -> None:
