@@ -24,6 +24,9 @@ class Physics():
         elif difficulty == Difficulty.hard:
             self.magnitud = randint(10, 20)
 
+        if randint(0, 1) == 0:
+            self.magnitud *= -1
+
         else:
             self.magnitud = 0
             print('error, difficulty not found')
