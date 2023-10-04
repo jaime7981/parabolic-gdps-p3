@@ -1,4 +1,5 @@
 import pygame
+import math
 
 from classes.Enviroment import Enviroment
 from classes.Obstacle import Obstacle
@@ -24,6 +25,19 @@ class GUI():
 
         loaded_backgound = pygame.image.load(f'{assets_path}/background.jpg')
         self.background = pygame.transform.scale(loaded_backgound, (width, height))
+
+
+        loaded_arrow = pygame.image.load(f'{assets_path}/arrow.png')
+        self.arrow = pygame.transform.scale(
+            loaded_arrow, 
+            (
+                40 * math.log(abs(self.enviroment.physics.magnitud)), 
+                15 * math.log(abs(self.enviroment.physics.magnitud))
+            )
+        )
+
+        if self.enviroment.physics.magnitud < 0:
+            self.arrow = pygame.transform.flip(self.arrow, True, False)
 
 
     def normalize_y_position_to_floor(self, y_position: int) -> int:
@@ -211,6 +225,14 @@ class GUI():
         angle = self.enviroment.physics.get_angle_from_two_points(player_center, mouse_position)
 
         self.enviroment.shoot(angle, velocity, player_center)
+
+    def draw_wind_arrow(self):
+        if self.enviroment.physics.magnitud == 0:
+            return
+        
+        label_surface = self.font.render(f'wind: {abs(self.enviroment.physics.magnitud)}', True, 'black')
+        self.screen.blit(label_surface, (20, 5))
+        self.screen.blit(self.arrow, (20, 20))
     
 
     def draw_mouse(self):
@@ -238,6 +260,7 @@ class GUI():
             self.check_events()
 
             self.draw_background()
+            self.draw_wind_arrow()
             self.draw_players()
             self.draw_obstacle(self.enviroment.obstacle)
             self.draw_mouse()
