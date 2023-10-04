@@ -100,7 +100,8 @@ class Enviroment():
             angle, 
             velocity, 
             self.physics, 
-            player_center
+            player_center,
+            self.actual_payer
         )
 
         return proyectile
@@ -120,6 +121,40 @@ class Enviroment():
 
             if proyectile.time > 100:
                 self.proyectiles.remove(proyectile)
+
+    
+    def check_proyectiles_collisions(self, normalize_position) -> None:
+        for proyectile in self.proyectiles:
+            proyectile_position = proyectile.calculate_position_on_proyectile_time()
+
+
+            if self.physics.is_circle_inside_rectangle(
+                    proyectile_position,
+                    proyectile.radius,
+                    self.obstacle.width,
+                    self.obstacle.height,
+                    (
+                        self.obstacle.position[0],
+                        normalize_position(self.obstacle.position[1] + self.obstacle.height)
+                    )
+                ):
+                self.proyectiles.remove(proyectile)
+                print('Obstacle hit!')
+
+            for player in self.players:
+                if self.physics.is_circle_inside_rectangle(
+                        proyectile_position, 
+                        proyectile.radius, 
+                        player.width, 
+                        player.height, 
+                        (
+                            player.player_position[0],
+                            normalize_position(player.player_position[1] + player.height)
+                        )
+                    ) and player != proyectile.shooting_player:
+                    player.substrac_health(10)
+                    self.proyectiles.remove(proyectile)
+                    print('Player hit!')
         
 
     def start_game(self) -> None:

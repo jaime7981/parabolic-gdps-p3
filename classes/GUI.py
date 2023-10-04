@@ -178,11 +178,13 @@ class GUI():
 
 
     def draw_proyectiles(self) -> None:
+        self.enviroment.check_proyectiles_collisions(self.normalize_y_position_to_floor)
+        
         for proyectile in self.enviroment.proyectiles:
             proyectile_position = proyectile.calculate_position_on_proyectile_time()
             proyectile.add_time()
 
-            pygame.draw.circle(self.screen, (10, 200, 100), proyectile_position, 5)
+            pygame.draw.circle(self.screen, proyectile.color, proyectile_position, proyectile.radius)
 
 
     def shoot_projectile(self):

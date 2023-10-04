@@ -1,7 +1,8 @@
 from classes.Physics import Physics
+from classes.Player import Player
 
 class Proyectil:
-    def __init__(self, angle, velocity, physics: Physics = Physics(), start_position: tuple = (0, 0)) -> None:
+    def __init__(self, angle, velocity, physics: Physics = Physics(), start_position: tuple = (0, 0), shooting_player: Player = None) -> None:
         self.physics = physics
 
         self.angle = angle
@@ -10,6 +11,11 @@ class Proyectil:
         self.position = start_position
 
         self.time = 0
+
+        self.radius = 5
+        self.color = (10, 200, 100)
+
+        self.shooting_player = shooting_player
 
     
     def set_angle(self, angle: int):
