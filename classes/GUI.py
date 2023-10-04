@@ -214,6 +214,8 @@ class GUI():
 
 
     def run_game(self) -> None:
+        end_game_results = None
+
         while self.running:
             self.clock.tick(self.tick)
             self.check_events()
@@ -227,6 +229,15 @@ class GUI():
 
             pygame.display.update()
 
+            is_game_ended, end_game_results = self.enviroment.check_game_end()
+
+            if is_game_ended:
+                self.running = False
+
+        if end_game_results is None:
+            print('Game ended, no winner')
+        else:
+            print(f'Game ended, winner: {end_game_results.get("winner")}')
 
 
     

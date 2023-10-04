@@ -104,3 +104,10 @@ class Physics():
         force_y = self.calculate_force_y(angle, velocity)
         position_y = 1/2 * (self.gravity * time**2) + (force_y * time) + initial_position_y
         return position_y
+    
+
+    def calculate_damage(self, time: int, velocity: int, angle: int) -> int:
+        force_x = self.calculate_force_x(angle, velocity)
+        force_y = self.calculate_force_y(angle, velocity)
+
+        return int(force_x * time + force_y * time)

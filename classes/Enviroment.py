@@ -152,9 +152,9 @@ class Enviroment():
                             normalize_position(player.player_position[1] + player.height)
                         )
                     ) and player != proyectile.shooting_player:
-                    player.substrac_health(10)
+                    player.substrac_health(proyectile.damage)
+                    print(f'Player hit! {proyectile.damage} damage!')
                     self.proyectiles.remove(proyectile)
-                    print('Player hit!')
         
 
     def start_game(self) -> None:
