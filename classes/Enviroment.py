@@ -128,7 +128,6 @@ class Enviroment():
             proyectile_position = proyectile.calculate_position_on_proyectile_time()
 
             if self.obstacle_diff != Difficulty.none:
-                print("Prueba"+str(self.obstacle_diff))
                 if self.physics.is_circle_inside_rectangle(
                         proyectile_position,
                         proyectile.radius,
