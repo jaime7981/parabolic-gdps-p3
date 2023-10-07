@@ -127,19 +127,20 @@ class Enviroment():
         for proyectile in self.proyectiles:
             proyectile_position = proyectile.calculate_position_on_proyectile_time()
 
-
-            if self.physics.is_circle_inside_rectangle(
-                    proyectile_position,
-                    proyectile.radius,
-                    self.obstacle.width,
-                    self.obstacle.height,
-                    (
-                        self.obstacle.position[0],
-                        normalize_position(self.obstacle.position[1] + self.obstacle.height)
-                    )
-                ):
-                self.proyectiles.remove(proyectile)
-                print('Obstacle hit!')
+            if self.obstacle_diff != Difficulty.none:
+                print("Prueba"+str(self.obstacle_diff))
+                if self.physics.is_circle_inside_rectangle(
+                        proyectile_position,
+                        proyectile.radius,
+                        self.obstacle.width,
+                        self.obstacle.height,
+                        (
+                            self.obstacle.position[0],
+                            normalize_position(self.obstacle.position[1] + self.obstacle.height)
+                        )
+                    ):
+                    self.proyectiles.remove(proyectile)
+                    print('Obstacle hit!')
 
             for player in self.players:
                 if self.physics.is_circle_inside_rectangle(
