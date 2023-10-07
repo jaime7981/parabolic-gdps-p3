@@ -26,15 +26,16 @@ class GUI():
         loaded_backgound = pygame.image.load(f'{assets_path}/background.jpg')
         self.background = pygame.transform.scale(loaded_backgound, (width, height))
 
-
         loaded_arrow = pygame.image.load(f'{assets_path}/arrow.png')
-        self.arrow = pygame.transform.scale(
-            loaded_arrow, 
-            (
-                40 * math.log(abs(self.enviroment.physics.magnitud)), 
-                15 * math.log(abs(self.enviroment.physics.magnitud))
+
+        if self.enviroment.physics.magnitud != 0:
+            self.arrow = pygame.transform.scale(
+                loaded_arrow, 
+                (
+                    40 * math.log(abs(self.enviroment.physics.magnitud)), 
+                    15 * math.log(abs(self.enviroment.physics.magnitud))
+                )
             )
-        )
 
         if self.enviroment.physics.magnitud < 0:
             self.arrow = pygame.transform.flip(self.arrow, True, False)
